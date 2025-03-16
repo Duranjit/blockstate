@@ -1,0 +1,16 @@
+{
+      "name": "ganache-transaction",
+      "version": "1.0.0",
+      "description": "Transaction with private Ethereum like Ganache for testing",
+      "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "serve": "vite preview"
+      },
+      "dependencies": {
+        "web3": "^1.8.0"
+      },
+      "devDependencies": {
+        "vite": "^4.0.0"
+      }
+    }

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>List Your Property</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    </head>
+
+    <body class="bg-gray-100">
+      <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+          <div class="flex justify-between items-center h-16">
+            <div class="flex items-center">
+              <a href="/" class="text-2xl font-bold text-blue-600">BlockEstate</a>
+            </div>
+            <div class="hidden md:flex space-x-8">
+              <a href="/" class="text-gray-700 hover:text-blue-600">Home</a>
+              <a href="/browse-properties.html" class="text-gray-700 hover:text-blue-600">Buy</a>
+              <a href="/list-property.html" class="text-gray-700 hover:text-blue-600">Sell</a>
+              <a href="#" class="text-gray-700 hover:text-blue-600">About</a>
+            </div>
+            <button id="connectWallet" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+              Connect Wallet
+            </button>
+          </div>
+        </div>
+      </nav>
+      <div class="container mx-auto p-8">
+        <h1 class="text-2xl font-bold mb-4">List Your Property</h1>
+        <form id="propertyForm" class="max-w-lg bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
+              Address
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="address" type="text" placeholder="Property Address">
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="price">
+              Price (ETH)
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="price" type="number" placeholder="Price in ETH">
+          </div>
+          <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+              Description
+            </label>
+            <textarea
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="description" placeholder="Property Description"></textarea>
+          </div>
+          <div class="flex items-center justify-between">
+            <button
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="button" onclick="listProperty()">
+              List Property
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <script>
+        async function listProperty() {
+          const address = document.getElementById('address').value;
+          const price = document.getElementById('price').value;
+          const description = document.getElementById('description').value;
+
+          if (typeof window.ethereum !== 'undefined') {
+            try {
+              const accounts = await window.ethereum.request({
+                method: 'eth_requestAccounts'
+              });
+              const account = accounts[0];
+
+              // Basic validation
+              if (!address || !price || !description) {
+                alert('Please fill in all fields.');
+                return;
+              }
+
+              // Here you would integrate with your smart contract
+              // Example:
+              // const contract = new web3.eth.Contract(contractABI, contractAddress);
+              // await contract.methods.listProperty(address, price, description).send({ from: account });
+
+              alert('Property listing submitted!');
+            } catch (error) {
+              console.error('Error listing property:', error);
+              alert('Failed to list property. Please check console for details.');
+            }
+          } else {
+            alert('Please install MetaMask to use this feature!');
+          }
+        }
+      </script>
+    </body>
+
+    </html>
